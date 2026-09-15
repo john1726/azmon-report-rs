@@ -1,0 +1,23 @@
+title: CDVS Telemetry Report
+timespan: PT24H
+output_directory: reports
+authentication:
+  # azure_cli uses your existing `az login` session. Set AZURE_MONITOR_TOKEN
+  # instead to bypass Azure CLI token acquisition.
+  mode: azure_cli
+queries:
+  - name: FileSender failures
+    source:
+      kind: log_analytics
+      id: 00000000-0000-0000-0000-000000000000
+    query_file: queries/filesender-failures.kql
+    formats: [markdown, csv, json]
+
+  - name: Application request summary
+    source:
+      kind: application_insights
+      id: 11111111-1111-1111-1111-111111111111
+    query: |
+      requests
+      | summarize Requests=count(), Failures=countif(success == false)
+    formats: [markdown, csv]

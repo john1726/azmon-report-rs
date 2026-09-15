@@ -1,0 +1,5 @@
+traces
+| where message contains "FileSender"
+| where severityLevel >= 3
+| project timestamp, severityLevel, message, operation_Id
+| order by timestamp desc
