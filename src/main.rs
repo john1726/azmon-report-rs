@@ -173,7 +173,9 @@ async fn run(config_path: &Path) -> Result<()> {
 async fn acquire_cli_token(resource: &str, mode: &AuthMode) -> Result<String> {
     match mode {
         AuthMode::AzureCli => {
-            let output = Command::new("az")
+            // Windows CreateProcess only auto-resolves ".exe"; az ships as "az.cmd".
+            let az_cmd = if cfg!(windows) { "az.cmd" } else { "az" };
+            let output = Command::new(az_cmd)
                 .args(["account", "get-access-token", "--resource", resource, "--query", "accessToken", "-o", "tsv"])
                 .stdin(Stdio::null()).output().await
                 .context("failed to run Azure CLI; install it and run `az login`")?;
