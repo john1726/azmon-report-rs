@@ -1,5 +1,5 @@
-traces
-| where message contains "FileSender"
-| where severityLevel >= 3
-| project timestamp, severityLevel, message, operation_Id
-| order by timestamp desc
+AppTraces
+| where Message contains "FileSender"
+| where SeverityLevel >= 3
+| project TimeGenerated, SeverityLevel, Message, OperationId
+| order by TimeGenerated desc
