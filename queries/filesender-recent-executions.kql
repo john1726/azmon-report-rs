@@ -1,0 +1,5 @@
+AppRequests
+| where TimeGenerated > ago(24h)
+| where AppRoleName == "func-cdvs-filesender-dev"
+| project TimeGenerated, Name, Success, DurationMs
+| order by TimeGenerated desc

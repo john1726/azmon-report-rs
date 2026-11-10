@@ -1,0 +1,6 @@
+AppExceptions
+| where TimeGenerated > ago(24h)
+| where AppRoleName == "func-cdvs-filesender-dev"
+| project TimeGenerated, ExceptionType, Message, InnermostMessage, ProblemId
+| order by TimeGenerated desc
+| take 50

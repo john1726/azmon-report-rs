@@ -1,0 +1,6 @@
+AppTraces
+| where TimeGenerated > ago(24h)
+| where AppRoleName == "func-cdvs-filesender-dev"
+| where Message has_any ("ServiceBus", "received", "processing", "message", "queue")
+| project TimeGenerated, Message
+| order by TimeGenerated desc
