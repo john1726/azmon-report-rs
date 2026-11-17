@@ -13,6 +13,27 @@ queries:
     query_file: queries/filesender-failures.kql
     formats: [markdown, csv, json]
 
+  - name: FileSender recent executions
+    source:
+      kind: log_analytics
+      id: 00000000-0000-0000-0000-000000000000
+    query_file: queries/filesender-recent-executions.kql
+    formats: [markdown, csv, json]
+
+  - name: FileSender exceptions
+    source:
+      kind: log_analytics
+      id: 00000000-0000-0000-0000-000000000000
+    query_file: queries/filesender-exceptions.kql
+    formats: [markdown, csv, json]
+
+  - name: FileSender ServiceBus activity
+    source:
+      kind: log_analytics
+      id: 00000000-0000-0000-0000-000000000000
+    query_file: queries/filesender-servicebus-activity.kql
+    formats: [markdown, csv, json]
+
   - name: Application request summary
     source:
       kind: application_insights
